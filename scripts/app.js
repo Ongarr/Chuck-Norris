@@ -1,6 +1,7 @@
 const randomButton = document.querySelector('button');
 const jokeText = document.querySelector('.joke-field');
 const categoriesButtonsBox = document.querySelector('.categories-buttons');
+const joke = new Joke();
 
 
 const updateUI = (data) => {
@@ -14,7 +15,7 @@ const categoriesList = data => {
         categoriesButtonsBox.innerHTML += `<span class="button cat-button ${element}" href="#">${element}</span>`;
         categoriesButtonsBox.addEventListener('click', e => {
             if (e.target.classList.contains(element))
-                getJokesFromCategory(element)
+                joke.getJokesFromCategory(element)
                 .then(data => updateUI(data))
                 .catch(err => console.log(err));
         });
@@ -22,7 +23,7 @@ const categoriesList = data => {
 };
 
 
-getJokes('categories')
+joke.getJokes('categories')
     .then(data => categoriesList(data))
     .catch(error => console.log(error))
 
@@ -30,7 +31,7 @@ getJokes('categories')
 randomButton.addEventListener('click', e => {
     e.preventDefault()
 
-    getJokes('random')
+    joke.getJokes('random')
         .then(data => updateUI(data))
         .catch(err => console.log(err));
 });
