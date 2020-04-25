@@ -24,4 +24,4 @@ class Joke{
     
         return data;
     }
-}
+} 
